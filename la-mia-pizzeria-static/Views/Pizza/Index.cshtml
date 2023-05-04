@@ -1,0 +1,29 @@
+﻿@using la_mia_pizzeria_static.Controllers;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<Pizza>
+}
+
+<section class="container py-5">
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-5">
+        @foreach(Pizza pizza in Model)
+        {
+            <div class="card bg-danger border-light" style="width: 300px;">
+                <img src="@pizza.Image" class="card-img-top bg-danger" alt="" style="height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-white">@pizza.Name</h5>
+                    <p class="card-text">@pizza.Description</p>
+                    <div class="text-dark">@pizza.Price &euro;</div>
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <div class="btn btn-warning">
+                            <a href="@Url.Action("Details", "Pizza", new{id = pizza.Id})" class="text-light">Mostra dettagli</a>
+                        </div>
+                        <div class="btn btn-success">Acquista</div>
+                    </div> 
+                </div>
+            </div>
+        }
+    </div>
+</section>
