@@ -4,7 +4,7 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class PizzaController : Controller
     {
-        List<Pizza> pizze = new List<Pizza>
+        public static List<Pizza> pizze = new List<Pizza>
         {
             new Pizza(
                     1, 
@@ -66,5 +66,26 @@ namespace la_mia_pizzeria_static.Controllers
                 return View("ErrorPizza");
             }
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View("Crate");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Pizza data)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", data);
+            }
+
+            pizze.Add(data);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
